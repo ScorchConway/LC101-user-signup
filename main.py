@@ -10,7 +10,6 @@ def post_to_index():
     username = request.form['username']
     password = request.form['password']
     password_confirmation = request.form['password_confirmation']
-    print('smoke')
     email = request.form['email']
 
     username_error = ''
@@ -20,17 +19,18 @@ def post_to_index():
     
     whitespace = re.compile('\s')
     if not username or whitespace.search(username) or not(2 < len(username) < 21):
-        username_error = 'please submit a valid username (3-20 characters, no spaces)'
+        username_error = 'Please submit a valid username (3-20 characters, no spaces)'
     
     if not password or whitespace.search(password) or not(2 < len(password) < 21):
-        password_error = 'please submit a valid password (3-20 characters, no spaces)'
+        password_error = 'Please submit a valid password (3-20 characters, no spaces)'
 
     if not (password == password_confirmation):
-        password_conf_error = "passwords don't match"
+        password_conf_error = "Passwords need to match"
 
+    valid_email = re.compile('[^@]+@[^@]+\.[^@]+')
     if email:
-        if not '@' in email or not '.' in email or whitespace.search(email) or not(2 < len(email) < 21):
-            email_error = 'please submit valid email (ex: fake@email.com)'
+        if not valid_email.search(email) or whitespace.search(email) or not(2 < len(email) < 21):
+            email_error = 'Please submit valid email (ex: fake@email.com)'
 
     if username_error or password_error or password_conf_error or email_error:
         return render_template("user-signup.html",  username_error=username_error,
@@ -50,6 +50,7 @@ def index():
 def welcome():
     username = request.args.get('username')
     return render_template("welcome.html", username=username)
+    
     
 
 app.run()

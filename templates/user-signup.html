@@ -4,9 +4,11 @@
 <h1>Signup</h1>
 
 <form action='/', method='POST'>
-    <label for='username'>Username</label>
-    <input type='text' name='username' value={{username}}>
-    <p class='error'>{{username_error}}</p>
+    <div>
+        <label for='username'>Username</label>
+        <input type='text' name='username' value={{username}}>
+        <p class='error'>{{username_error}}</p>
+    </div>
     <br>
     <label for='password'>Password</label>
     <input type='password' name='password'>
@@ -14,7 +16,7 @@
     <br>
     <label for='password_confirmation'>Verify Password</label>
     <input type='password' name='password_confirmation'>
-    <p class='error'>{{password_conf_error}}<br>
+    <p class='error'>{{password_conf_error}}</p><br>
     <label for='email'>Email (optional)</label>
     <input type='text' name='email' value={{email}}>
     <p class='error'>{{email_error}}</p>
